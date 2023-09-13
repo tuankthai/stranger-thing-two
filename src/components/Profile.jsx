@@ -8,8 +8,9 @@ const BASE_URL = 'https://strangers-things.herokuapp.com/';
 
 import Nav from './Nav'
 import Login from './Login'
+import Logout from './Logout'
 import UserProfile from './UserProfile'
-import Home from './Home'
+
 
 
 export default function Profile() {
@@ -34,21 +35,7 @@ export default function Profile() {
 
 
 
-    function logIn(token) {
-        setToken(token)
-    }
-
-    function logout() {
-        setToken("")
-    }
-
-    function isLoggedIn() {
-        if (token.length) {
-            return true;
-        }
-
-    }
-
+    
     async function handleSubmit(e) {
         e.preventDefault();
         console.log("hello handleSubmit")
@@ -97,7 +84,7 @@ export default function Profile() {
                     (   
                         src.includes('logout') ?
                             ( 
-                                <Home />
+                                <Logout setToken={setToken} />
                             )
                             :
                             (

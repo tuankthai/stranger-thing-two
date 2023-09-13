@@ -9,6 +9,7 @@ import Profile from './components/Profile.jsx'
 import Posts from './components/Posts.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Register from './components/Register.jsx'
+import AddPost from './components/AddPost.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Posts" element={<Posts />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/AddPost" element={<AddPost />} />
         <Route path="/" element={<Home />} />
       </Routes>
 

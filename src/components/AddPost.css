@@ -1,0 +1,15 @@
+#new-post-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20em;
+    margin-left: 2em;
+
+}
+
+#post-form-h3 {
+    color: #134611;
+    font-style: italic;
+    font-size: 2rem;
+    width: 30rem;
+}

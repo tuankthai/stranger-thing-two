@@ -66,7 +66,9 @@ header {
 
 #logo {
   color: white;
-  float: left;
+  /* postion and left must work together */
+  position: relative;
+  left: -131px;
   
   text-decoration: none;
   font-size: 1.5em;

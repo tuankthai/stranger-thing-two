@@ -83,7 +83,7 @@ export default function Login({setToken}) {
         } catch (error) {
             console.log("error: ", error)
             setError(error.message)
-            setErrormsg("You don't have an account!!!")
+            setErrormsg("Please sign up.  You don't have an account.")
 
         }
 
