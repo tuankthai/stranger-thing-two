@@ -22,6 +22,13 @@ export default function PostBox({ post }) {
             <h4>price: {post.price}</h4>
             <h4>seller: {post.author.username}</h4>
             <h4>Location: {post.location}</h4>
+            {                
+            post.isAuthor &&
+            < button > VIEW</button>
+            }
+            {post.isAuthor === false &&
+            < button > MESSAGE  </button>
+            }
         </div>
 
     );

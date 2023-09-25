@@ -23,13 +23,28 @@ export default function AddPost() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log("hello addpost handleSubmit,type of willDeliver= ", typeof(willdeliver));
+        console.log("hello addpost handleSubmit,type of willDeliver= ", typeof (willdeliver));
 
         if (!isLoggedIn()) {
             console.log("not logged in ")
             setErrormsg("Please sign in to add a new post!!!")
             return;
         }
+
+        const post = {
+            post: {
+                title: `${title}`,
+                description: `${description}`,
+                price: `${price}`,
+                location: `${location}`,
+                willDeliver: `${willdeliver}`,
+            }
+        }
+        // OBJECT DATA EXPECTED by API....IMPORTANT... DON'T DELETE THESE COMMENTS
+        // title: "My favorite stuffed animal",
+        // description: "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
+        // price: "$480.00",
+        // willDeliver: true
 
         const makePost = async () => {
 
@@ -40,22 +55,9 @@ export default function AddPost() {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${getAuthToken()}`
                     },
-                    body: JSON.stringify({
-                        post: {
-                            title: `${title}`,
-                            description: `${description}`,
-                            price: `${price}`,
-                            location: `${location}`,
-                            willDeliver: `${willdeliver}`,
-                            // title: "My favorite stuffed animal",
-                            // description: "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
-                            // price: "$480.00",
-                            // willDeliver: true
-                        }
-                    })
+                    body: JSON.stringify(post                       
+                    )
                 });
-                // const result = await response.json();
-                // console.log(result);
 
                 console.log("response: ", response)
                 const result = await response.json();
@@ -92,53 +94,41 @@ export default function AddPost() {
 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title"> Title: </label><br />
-
                 <input value={title}
                     onChange={(e) => { setTitle(e.target.value) }}
                     type="text" name="title" id="title"
                     placeholder="title" required
-                />
-                <br />
-                <br />
+                /><br /><br />                               
 
                 <label htmlFor="decription"> Description : </label><br />
                 <input value={description} onChange={(e) => { setDescription(e.target.value) }}
                     type="text" name="description" id="description" placeholder="description" required
-                />
-                <br />
-                <br />
-
+                /><br /><br />
+                               
                 <label htmlFor="price"> Price: </label><br />
                 <input value={price} onChange={(e) => { setPrice(e.target.value) }}
                     type="text" name="price" id="price" placeholder="price" required
-                />
-                <br />
-                <br />
-
+                /><br /><br />
+                               
                 <label htmlFor="location"> Location: </label><br />
                 <input value={location} onChange={(e) => { setLocation(e.target.value) }}
                     type="text" name="location" id="location" placeholder="location " required
-                />
-                <br />
-                <br />
-
+                /><br /><br /> 
+                               
                 <label htmlFor="willdeliver"> Willing to Deliver? </label><br />
                 <input value={willdeliver} onChange={(e) => {
-                    setWilldeliver ( e.target.checked )
+                    setWilldeliver(e.target.checked)
                 }}
                     type="checkbox" name="willdeliver" id="willdeliver"
-                    placeholder="willdeliver " 
-                />
-                <br />
-                <br />
-
-
+                    placeholder="willdeliver "
+                /><br /><br />
+                            
                 <button >Create</button>
 
             </form>
 
-            <br />
-            <br />
+            <br /><br />
+            
             <h4>{errormsg}</h4>
         </div>
 

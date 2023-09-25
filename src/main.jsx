@@ -10,6 +10,8 @@ import Posts from './components/Posts.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Register from './components/Register.jsx'
 import AddPost from './components/AddPost.jsx'
+import ViewPost from './components/ViewPost.jsx'
+import SendMsg from './components/SendMsg.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -23,6 +25,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/Posts" element={<Posts />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/AddPost" element={<AddPost />} />
+        <Route path="/ViewPost" element={<ViewPost />} />
+        <Route path="/SendMsg" element={<SendMsg />} />
         <Route path="/" element={<Home />} />
       </Routes>
 

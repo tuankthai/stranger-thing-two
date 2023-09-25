@@ -6,21 +6,24 @@ export function login(token) {
 
 }
 
-export function logout() {
-    
-    localStorage.setItem("token", "");
+export function logout() {  
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
     console.log("local store token is ", localStorage.getItem("token"))
-
 }
 
-export  function getAuthToken() {
+export function getAuthToken() {
     return localStorage.getItem("token");
+}
 
+export function getUsername() {
+    return localStorage.getItem("username");
 }
 
 export default function isLoggedIn() {
-    if (localStorage.getItem("token").length) {
+    if (localStorage.getItem("token")) {
         return true;
-    }
+    } else
+    { return false }
 
 }
