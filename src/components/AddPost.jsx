@@ -70,6 +70,9 @@ export default function AddPost() {
                 setLocation("")
                 setWilldeliver(false)
 
+                // setErrormsg("new post created successfully!!")
+                window.alert("new post created successfully!!")
+
                 //add new post to posts array TO DO.....
 
                 //navigate to UserProfile page
@@ -126,9 +129,7 @@ export default function AddPost() {
                 <button >Create</button>
 
             </form>
-
-            <br /><br />
-            
+            {/* <br />             */}
             <h4>{errormsg}</h4>
         </div>
 

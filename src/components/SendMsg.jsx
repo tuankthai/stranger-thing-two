@@ -1,48 +1,36 @@
 import React, { useEffect } from "react"
 
 import { useState } from 'react';
-import { patchPost, deletePost } from "./API"
+import { postMessage } from "./API"
 import { getAuthToken } from "./Helper"
 
 export default function SendMsg() {
     const restoredPost = JSON.parse(localStorage.getItem("post"));
-    console.log("ViewPost estoredPost = ", restoredPost)
+    console.log("SendMsg estoredPost = ", restoredPost)
 
     const [post, setPost] = useState(restoredPost)
     console.log("in SendMsg, post =  ", post);
 
-    const [expand, setExpand] = useState(false)
-    const [errormsg, setErrormsg] = useState(null)
-    const [message, setMessage] = useState(null)
+    // const [expand, setExpand] = useState(false)
+    const [errormsg, setErrormsg] = useState("")
+    const [message, setMessage] = useState("")
 
-    function handleSendMsg() {
+    async function handleSendMsg() {
+        const token = getAuthToken();
+        console.log("handleSave token =", token)
         console.log("in handleSendMsg, you click send")
 
-    }
+        //call send msg api ...TO DO....
+        try {
+            const result = await postMessage(post._id, message, token);
+            console.log("after postMessage, result = ", result)
+            setErrormsg("Your message sent successfully!!")
+        } catch (error) {
+            console.log("error: ", error)
+            // setError(error.message)
+            setErrormsg("Sorry, postMessaget fails!!")
+        }
 
-    
-    function xxxxexpandMsgForm() {
-        return (
-            <div>
-                <label htmlFor="title"> Title: </label><br />
-                <input value={editPost.title}
-                    onChange={(e) => {
-                        setEditPost({ ...editPost, title: editPost.title = e.target.value })
-                    }}
-                    type="text" name="title" id="title"
-                    placeholder="title" required
-                /><br />
-
-                < button onClick={() => {
-                    console.log("you click SEND BUTTON")
-                    handleSend()
-                }
-                }>
-                    SEND MESSAGE  </button>
-                <p>{errormsg}</p>
-
-            </div>
-        )
     }
 
     return (
@@ -53,11 +41,11 @@ export default function SendMsg() {
             <h4>seller: {post.author.username}</h4>
             <h4>Location: {post.location}</h4>
             <br /><br /><br /><br />
-            <h1>Message User about This Post</h1>
-            <label htmlFor="title"> Title: </label><br />
+            <h4>Message User about This Post</h4>
+            <label htmlFor="message"> Message: </label><br />
             <input value={message}
                 onChange={(e) => {
-                    setMessage(e.target.value )
+                    setMessage(e.target.value)
                 }}
                 type="message" name="message" id="message" size="70"
                 placeholder="message" required
@@ -67,8 +55,10 @@ export default function SendMsg() {
             }}
             > SEND MESSAGE</button>
             <hr />
+            <p>{errormsg}</p>               
 
         </div>
     )
 
 }
+

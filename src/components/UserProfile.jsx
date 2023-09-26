@@ -1,103 +1,117 @@
 
-import React from "react"
-import { useState } from "react"
 import './Profile.css'
-
-const cohortName = "2302-acc-pt-web-pt-e";
-const BASE_URL = 'https://strangers-things.herokuapp.com/';
-
+import React, { useEffect, useState } from "react"
+import { fetchMyData } from "./API"
+import { getAuthToken } from "./Helper"
+import { Link } from 'react-router-dom'
 import NavProfile from './NavProfile'
-
 
 export default function UserProfile() {
 
+    // const [posts, setPosts] = useState([])
+    const [userObj, setUserObj] = useState({})
     const [posts, setPosts] = useState([])
     const [messages, setMessages] = useState([])
-    const [username, setUsername] = useState("")
-    const [loggedIn, setLoggedIN] = useState(false)
-    const [token, setToken] = useState("")
     const [src, setSrc] = useState("")
+    const [errormsg, setErrormsg] = useState("")
 
     const searchParams = new URLSearchParams(window.location.search);
     console.log(searchParams.has('src'));
-    //if has src query string, then it is from nav bar. it should have one of three values login, logout, profile
+    //if has src query string, then it is from nav bar. 
+    //it should have one of three values login, logout, profile
     //otherwise, it is from /Profile route
     if (searchParams.has('src')) {
         console.log(searchParams.get('src'))
         searchParams.get('src');
-
     }
 
 
-
-
-    function logIn(token) {
-        setToken(token)
+    function expandOneMsgToMe(msg, post) {
+        console.log("inside expandOneMsgToMe , msg=", msg)
+        return (
+            <div>
+                <h4>From: {msg.fromUser.username}</h4>
+                <h4>{msg.content}</h4>
+                {/* <h4>VIEW MY POST: {post.title}</h4> */}
+                <h3>My Post Title: {post.title}</h3>
+                <hr />
+            </div>
+        )
     }
 
-    function logout() {
-        setToken("")
+    function expandMsgsToMe(post) {
+        console.log("inside expandMsgsToMe, post=", post)
+        return (
+            <div>
+                {post.messages.map((msg) => {
+                    console.log("map msg: ", msg)
+                    return expandOneMsgToMe(msg, post)
+                })} 
+                {/* <h4>VIEW MY POST: {post.title}</h4> */}
+                {/* <Link to="/Posts">VIEW MY POST: { post.title}</Link> */}
+            </div>
+        )
     }
 
-    function isLoggedIn() {
-        if (token.length) {
-            return true;
-        }
-
+    function expandSentByMe(msg) {
+        console.log("expandSentByMe, msg=", msg)
+        return (
+            <div>
+                <h4>(Sent By Me)</h4>
+                <h4>{msg.content}</h4>
+                {/* <h4>MESSAGE AGAIN: {msg.post.title}</h4> */}
+                <h3>Post Title: {msg.post.title}</h3>               
+                {/* <Link to="/Posts">MESSAGE AGAIN: {msg.title}</Link> */}
+                <hr />
+            </div>
+        )
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        console.log("hello handleSubmit")
+    async function fetchProfileData() {
+        const token = getAuthToken();
+        console.log("fetchProfileData token =", token)
 
         try {
-            console.log("before fetching: token >> ", localStorage.getItem("token"));
-            console.log("before fetching: username >> ", localStorage.getItem("username"));
-
-            const response = await fetch(`${BASE_URL}/api/${cohortName}/usesrs/me`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem("token")}`
-                    },
-                }
-            );
-            console.log("response: ", response)
-
-            const result = await response.json();
-
-            console.log("after json: ", result.data);
-            //update token
-
-            setPosts(result.data.posts);
-            setMessages(result.data.messages);
-            setUsername(result.data.username);
-
-
+            const result = await fetchMyData(token);
+            console.log("after fetchMyData, result = ", result)
+            setPosts(result.posts)
+            setMessages(result.messages)
         } catch (error) {
             console.log("error: ", error)
-            setError(error.message)
-
+            // setError(error.message)
+            setErrormsg("Sorry, fetchMyData fails!!")
         }
+
     }
+
+    useEffect(() => {
+        fetchProfileData();
+    }, []);
+
+    console.log("messages = ", messages)
+    console.log("posts = ", posts)
 
     return (
 
-        <div className="all-players-container">
+        <div>
             <NavProfile />
-            <h1>User Profile</h1>
-         
-            
-            {/* {posts.map((post) => {
+            {/* <h1>User Profile</h1> */}
+            <h1>Messages To Me:</h1>    
+            {posts.map((post) => {
                 console.log("map post: ", post)
-                return <PostBox key={post._id} post={post} 
-                />;
-            })}  */}
+                return expandMsgsToMe(post)               
+            })} 
 
+            <hr />
+            <h1>Messages From Me:</h1>    
+
+            {messages.map((msg) => {
+                console.log("map msg: ", msg)
+                return expandSentByMe(msg)
+            })} 
+
+            <hr />
+            <p>{errormsg}</p>               
         </div>
-
     )
 }
-
-// export default AddNewPlayerForm

@@ -5,7 +5,7 @@ export function login(token) {
     console.log("local store token is ", localStorage.getItem("token"))
 
 }
-
+ 
 export function logout() {  
     localStorage.removeItem("token");
     localStorage.removeItem("username");
@@ -26,4 +26,4 @@ export default function isLoggedIn() {
     } else
     { return false }
 
-}
+}  
