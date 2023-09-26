@@ -162,50 +162,6 @@ export default function ViewPost() {
             <hr />
             {expand && expandEditForm()}
             
-
-            {/* <label htmlFor="title"> Title: </label><br />
-            <input value={editPost.title}
-                onChange={(e) => {
-                    setEditPost({ ...editPost, title: editPost.title = e.target.value })
-                }}
-                type="text" name="title" id="title"
-                placeholder="title" required
-            /><br /> */}
-
-            {/* <label htmlFor="decription"> Description : </label><br />
-            <input value={editPost.description} onChange={(e) => {
-                setEditPost({ ...editPost, description: editPost.description = e.target.value })
-            }}
-                type="text" name="description" id="description" placeholder="description" required
-            /><br />
-            <label htmlFor="price"> Price: </label><br />
-            <input value={editPost.price} onChange={(e) => {
-                setEditPost({ ...editPost, price: editPost.price = e.target.value })
-            }}
-                type="text" name="price" id="price" placeholder="price" required
-            /><br /> */}
-            {/* <label htmlFor="location"> Location: </label><br />
-            <input value={editPost.location} onChange={(e) => {
-                setEditPost({ ...editPost, price: editPost.location = e.target.value })
-            }}
-                type="text" name="location" id="location" placeholder="location " required
-            /><br />
-            <label htmlFor="willdeliver"> Willing to Deliver? </label><br />
-            <input value={editPost.willDeliver} onChange={(e) => {
-                // setWilldeliver(e.target.checked)
-                setEditPost({ ...editPost, willDeliver: editPost.willDeliver = e.target.checked })
-            }}
-                type="checkbox" name="willdeliver" id="willdeliver"
-                placeholder="willdeliver "
-            /><br /> */}
-
-            {/* < button onClick={() => {
-                console.log("you click SAVE BUTTON")
-                handleSave()
-            }
-            }>
-                Save  </button>                     
-            <p>{errormsg}</p> */}
         </div>
     )
 }

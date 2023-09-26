@@ -16,3 +16,20 @@
     font-style: italic;
 
 }
+
+#profile-form-h3 {
+    color: #134611;
+    font-style: italic;
+    font-size: 2rem;
+    width: 30rem;
+    /* text-align: center; */
+}
+
+.profile_page_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+    margin-left: 20%;
+    width: 50%;
+}

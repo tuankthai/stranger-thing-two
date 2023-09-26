@@ -12,10 +12,7 @@ import { useNavigate } from "react-router-dom";
 import NavProfile from "./NavProfile";
 import isLoggedIn, { getAuthToken } from "./Helper"
 
-// const cohortName = "2302-acc-pt-web-pt-e";
-// const BASE_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-// import { fetchPosts, fetchPosts_withHeaders } from './API';
 import { fetchPosts_withHeaders } from './API';
 
 
@@ -38,24 +35,6 @@ export default function Posts() {
     }, []);
     //instructor michael new code END HERE ...WORKING!!!
 
-    // my old working code START HERE ...
-    // useEffect(() => {
-    //     const fetchPosts = async () => {
-    //         try {
-    //             const response = await fetch(`${BASE_URL}/posts`)
-    //             const result = await response.json();
-    //             console.log(result);
-    //             console.log("posts = ", result.data.posts);
-    //             setAllposts(result.data.posts)
-    //             setPosts(result.data.posts)
-    //         } catch (err) {
-    //             console.error(err);
-    //         }
-    //     }
-    //     fetchPosts()
-    // }, [])
-
-
     return (
 
         <div className="PostList">
@@ -66,7 +45,9 @@ export default function Posts() {
                     (<Nav />)
             }
 
-            <h1> Posts</h1>
+            <div className="post_page_div">
+
+            <h1> POSTS</h1>
 
             <input value={searchText}
                 onChange={(e) => {
@@ -89,45 +70,46 @@ export default function Posts() {
 
                 }}
 
-                type="text" name="searchText" id="searchText"
+                type="text" name="searchText" id="searchText" 
                 placeholder="searchText"
             />
 
-            {/* <a href="/" id="signup">(ADD POST)</a> */}
             <h3 id="addpost-h3" onClick={() =>
                 navigate(`/AddPost`)
             }>{"ADD POST"}</h3>
+            </div>
 
             {posts.map((post) => {
                 // console.log("map post: ", post)
-                // return <PostBox key={post._id} post={post} />;     
                 return (
                     <div>
                         <h2>{post.title}</h2>
-                        <h4> {post.description}</h4>
-                        <h4>price: {post.price}</h4>
-                        <h4>seller: {post.author.username}</h4>
+                        <p> {post.description}</p>
+                        <h4>Price: {post.price}</h4>
+                        <h4>Seller: {post.author.username}</h4>
                         <h4>Location: {post.location}</h4>
 
                         {isLoggedIn() && post.isAuthor &&
-                            < button onClick={() =>{
+                            < button onClick={() => {
                                 console.log("you click VIEW")
                                 localStorage.setItem("post", JSON.stringify(post));
                                 navigate(`/ViewPost`)
                             }
-                            
+
                             }
                             > VIEW</button>
                         }
                         {isLoggedIn() && post.isAuthor === false &&
-                            < button onClick={() => {                                                      
+                            < button onClick={() => {
                                 console.log("you click MESSAGE")
                                 localStorage.setItem("post", JSON.stringify(post));
                                 navigate(`/SendMsg`)
-                            } 
+                            }
                             }
                             > SEND MESSAGE  </button>
                         }
+                        {/* <hr /> */}
+                        <div className="postline"/>
                     </div>
                 )
             })}

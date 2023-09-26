@@ -2,10 +2,11 @@
 import NavProfile from "./NavProfile";
 import Nav from './Nav'
 import isLoggedIn, { getUsername } from "./Helper"
+import "../App.css"
 
 export default function Home() {
     return (
-        <div>
+        <div className="welcome"> 
             {/* <Nav /> */}
             {
                 isLoggedIn() ?
@@ -17,9 +18,10 @@ export default function Home() {
             {getUsername () &&
                 <h1>Login as {getUsername()} </h1>
             }
-            {getUsername() &&
-                <button>VIEW PROFILE</button>
-            }
+            {/* {getUsername() &&
+                <button
+                >VIEW PROFILE</button>
+            } */}
         </div>
     )
 }

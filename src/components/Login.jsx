@@ -71,14 +71,7 @@ export default function Login({ setToken }) {
             localStorage.setItem("username", username);
             
             //my code END HERE.....
-
-            //new code from instructor michael START HERE ....NOT WORKING!!!
-            // const newToken = loginUser(username, password)
-            // console.log("new token = ", newToken)
-            // setToken(newToken)
-            // localStorage.setItem("token", newToken);
-            // //new code from instructor michael END HERE ....NOT WORKING!!!
-
+            
             console.log("local store token is ", localStorage.getItem("token"))
 
             //clear input form fields
@@ -96,10 +89,14 @@ export default function Login({ setToken }) {
     }
 
     return (
-
-        <div className="new-player-form">
+        <div>
             <Nav />
-            <h3 id="form-h3">Login:</h3><br></br>
+
+        
+
+        <div className="login_page_div">
+                <h3 id="form-h3">Login:</h3><br></br>
+                {/* <h1 >Login:</h1><br></br> */}
 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username"> User Name: </label><br />
@@ -125,6 +122,6 @@ export default function Login({ setToken }) {
             <h4>{errormsg}</h4>
 
         </div>
-
+        </div>
     )
 }

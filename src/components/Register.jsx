@@ -30,7 +30,7 @@ export default function Register() {
         if (password.localeCompare(confirmPassword)) {
             setErrormsg("passwords do not match!!!");
             return;
-        } 
+        }
 
         try {
             //need to read status field value. 
@@ -53,12 +53,13 @@ export default function Register() {
                     },
                     // body: JSON.stringify( playerObj ),
                     body: JSON.stringify(
-                        { user:
-
                         {
-                            username: `${username}`,
-                            password: `${password}`
-                        }
+                            user:
+
+                            {
+                                username: `${username}`,
+                                password: `${password}`
+                            }
                         }
                     ),
                 }
@@ -95,42 +96,44 @@ export default function Register() {
 
     return (
 
-        <div className="new-player-form">
+        <div>
             <Nav />
+            <div className="login_page_div">
 
-            <h3 id="form-h3">Register:</h3><br></br>
+                <h3 id="form-h3">Register:</h3><br></br>
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username"> User Name: </label><br />
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="username"> User Name: </label><br />
 
-                <input value={username}
-                    onChange={(e) => { setUsername(e.target.value) }}
-                    type="text" name="username" id="username"
-                    placeholder="username" required
-                />
-                <br />
-                <br />
+                    <input value={username}
+                        onChange={(e) => { setUsername(e.target.value) }}
+                        type="text" name="username" id="username"
+                        placeholder="username" required
+                    />
+                    <br />
+                    <br />
 
-                <label htmlFor="password"> Password: </label><br />
-                <input value={password} onChange={(e) => { setPassword(e.target.value) }}
-                    type="text" name="password" id="password" placeholder="password" required
-                />
-                <br />
-                <br />
+                    <label htmlFor="password"> Password: </label><br />
+                    <input value={password} onChange={(e) => { setPassword(e.target.value) }}
+                        type="text" name="password" id="password" placeholder="password" required
+                    />
+                    <br />
+                    <br />
 
-                <label htmlFor="confirmPassword"> Confirm Password: </label><br />
-                <input value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value) }}
-                    type="text" name="confirmPassword" id="confirmPassword" placeholder="confirm password" required
-                />
-                <br />
-                <br />
+                    <label htmlFor="confirmPassword"> Confirm Password: </label><br />
+                    <input value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value) }}
+                        type="text" name="confirmPassword" id="confirmPassword" placeholder="confirm password" required
+                    />
+                    <br />
+                    <br />
 
-                <button >Register</button>
+                    <button >Register</button>
 
-            </form>
+                </form>
 
-            <h4>{errormsg}</h4>
+                <h4>{errormsg}</h4>
 
+            </div>
         </div>
 
 

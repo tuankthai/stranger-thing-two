@@ -41,10 +41,7 @@
   color: #888;
 } */
 
-/* .Nav {
-  display: flex;
-  justify-content: space-between;
-} */
+
 
 a {
   color: white;
@@ -87,4 +84,8 @@ header {
 #signup{
   color:black;
   font-size: 1.0em;
+}
+
+.welcome{
+  text-align: center;
 }

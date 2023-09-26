@@ -1,6 +1,7 @@
 
 import isLoggedIn, { getAuthToken } from "./Helper"
 import './AddPost.css'
+// import './Login.css'
 import { useNavigate } from "react-router-dom";
 import Nav from './Nav'
 import { useState } from "react"
@@ -90,10 +91,11 @@ export default function AddPost() {
     }
 
     return (
-        <div className="new-post-form">
+        <div>
             <Nav />
-
-            <h3 id="post-form-h3">Add New Post</h3><br></br>
+            <div className="add-post_page_div">
+                {/* <h3 id="post-form-h3">Add New Post</h3><br></br> */}
+                <h3 id="form-h3">Add New Post</h3>
 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title"> Title: </label><br />
@@ -124,13 +126,14 @@ export default function AddPost() {
                 }}
                     type="checkbox" name="willdeliver" id="willdeliver"
                     placeholder="willdeliver "
-                /><br /><br />
+                /><br />
                             
                 <button >Create</button>
 
             </form>
             {/* <br />             */}
             <h4>{errormsg}</h4>
+            </div>
         </div>
 
     )

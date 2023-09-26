@@ -8,3 +8,24 @@
 #addpost-h3{
     text-decoration: underline;
 }
+
+#searchText{
+    width: 45%
+}
+
+.postline {
+    height: 1px;
+    background-color: darkgray;
+    width: 55%;
+    margin-top: 1em;
+    box-shadow: 0 2px 4px;
+}
+
+.post_page_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+    margin-left: 20%;
+    width: 50%;
+}
